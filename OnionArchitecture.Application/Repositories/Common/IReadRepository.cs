@@ -8,8 +8,8 @@ namespace OnionArchitecture.Application.Repositories.Common
     {
         IQueryable<T> GetAll(TrackingState trackingState);
         IQueryable<T> GetAllByFilter(Expression<Func<T, bool>> filter, TrackingState trackingState);
-        T GetByFilter(Expression<Func<T, bool>> filter, TrackingState trackingState);
-        T GetById(Guid id);
+        T? GetByFilter(Expression<Func<T, bool>> filter, TrackingState trackingState);
+        T? GetById(Guid id, TrackingState trackingState);
         Task<T?> GetByFilterAsync(Expression<Func<T, bool>> filter, TrackingState trackingState);
         Task<T?> GetByIdAsync(Guid id, TrackingState trackingState);
     }
