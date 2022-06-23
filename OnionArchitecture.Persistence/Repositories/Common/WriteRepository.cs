@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
 using OnionArchitecture.Application.Repositories.Common;
 using OnionArchitecture.Domain.Entities.Common;
 using OnionArchitecture.Persistence.Contexts;
@@ -17,31 +16,14 @@ namespace OnionArchitecture.Persistence.Repositories.Common
 
         public DbSet<T> Table => _context.Set<T>();
 
-        public Task<EntityEntry<T>> AddAsync(T entity) => Table.AddAsync(entity);
+        public T Add(T entity) => Table.Add(entity).Entity;
 
-        public Task AddRangeAsync(IEnumerable<T> entities)
-        {
-            throw new NotImplementedException();
-        }
+        public bool Remove(T entity) => Table.Remove(entity).State == EntityState.Deleted;
 
-        public bool Remove(T entity)
-        {
-            throw new NotImplementedException();
-        }
+        public int Save() => _context.SaveChanges();
 
-        public Task<bool> RemoveAsync(Guid id)
-        {
-            throw new NotImplementedException();
-        }
+        public Task<int> SaveAsync() => _context.SaveChangesAsync();
 
-        public Task<int> SaveAsync()
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool Update(T entity)
-        {
-            throw new NotImplementedException();
-        }
+        public T Update(T entity) => Table.Update(entity).Entity;
     }
 }
