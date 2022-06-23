@@ -17,8 +17,6 @@ namespace OnionArchitecture.Persistence.Contexts
             base.OnModelCreating(modelBuilder);
         }
 
-
-
         public override int SaveChanges()
         {
             foreach (var item in ChangeTracker.Entries<BaseEntity>())
