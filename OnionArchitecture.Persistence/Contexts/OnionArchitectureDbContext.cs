@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Reflection;
+using Microsoft.EntityFrameworkCore;
 using OnionArchitecture.Domain.Entities;
 
 namespace OnionArchitecture.Persistence.Contexts
@@ -7,6 +8,11 @@ namespace OnionArchitecture.Persistence.Contexts
     {
         public OnionArchitectureDbContext(DbContextOptions options) : base(options)
         {
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         }
 
         public DbSet<Product> Products { get; set; } = default!;
