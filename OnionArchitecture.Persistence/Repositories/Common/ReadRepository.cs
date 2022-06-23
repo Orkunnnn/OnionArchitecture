@@ -1,8 +1,8 @@
 ﻿using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
-using OnionArchitecture.Application.Enums;
 using OnionArchitecture.Application.Repositories.Common;
 using OnionArchitecture.Domain.Entities.Common;
+using OnionArchitecture.Infrastructure.Enums;
 using OnionArchitecture.Persistence.Contexts;
 
 namespace OnionArchitecture.Persistence.Repositories.Common

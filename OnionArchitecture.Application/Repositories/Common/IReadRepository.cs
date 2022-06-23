@@ -1,6 +1,6 @@
 ﻿using System.Linq.Expressions;
-using OnionArchitecture.Application.Enums;
 using OnionArchitecture.Domain.Entities.Common;
+using OnionArchitecture.Infrastructure.Enums;
 
 namespace OnionArchitecture.Application.Repositories.Common
 {
