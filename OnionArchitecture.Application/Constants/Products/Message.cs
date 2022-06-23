@@ -1,4 +1,4 @@
-﻿namespace OnionArchitecture.Application.Constants.Product
+﻿namespace OnionArchitecture.Application.Constants.Products
 {
     public static class Message
     {

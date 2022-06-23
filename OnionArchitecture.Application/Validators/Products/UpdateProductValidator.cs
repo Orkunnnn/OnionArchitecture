@@ -1,5 +1,5 @@
 ﻿using FluentValidation;
-using OnionArchitecture.Application.Constants.Product;
+using OnionArchitecture.Application.Constants.Products;
 using OnionArchitecture.Application.ViewModels.Products;
 
 namespace OnionArchitecture.Application.Validators.Products
