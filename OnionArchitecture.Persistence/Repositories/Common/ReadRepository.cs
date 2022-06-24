@@ -18,16 +18,16 @@ namespace OnionArchitecture.Persistence.Repositories.Common
 
         public DbSet<T> Table => _context.Set<T>();
 
-        public IQueryable<T> GetAll(TrackingState trackingState) => trackingState == TrackingState.NoTracking ? Table.AsNoTracking() : Table.AsQueryable();
+        public IQueryable<T> GetAll(TrackingState trackingState = TrackingState.WithTracking) => trackingState == TrackingState.NoTracking ? Table.AsNoTracking() : Table.AsQueryable();
 
-        public IQueryable<T> GetAllByFilter(Expression<Func<T, bool>> filter, TrackingState trackingState) => trackingState == TrackingState.NoTracking ? Table.Where(filter).AsNoTracking() : Table.Where(filter);
+        public IQueryable<T> GetAllByFilter(Expression<Func<T, bool>> filter, TrackingState trackingState = TrackingState.WithTracking) => trackingState == TrackingState.NoTracking ? Table.Where(filter).AsNoTracking() : Table.Where(filter);
 
-        public T? GetByFilter(Expression<Func<T, bool>> filter, TrackingState trackingState) => trackingState == TrackingState.NoTracking ? Table.AsNoTracking().FirstOrDefault(filter) : Table.FirstOrDefault(filter);
+        public T? GetByFilter(Expression<Func<T, bool>> filter, TrackingState trackingState = TrackingState.WithTracking) => trackingState == TrackingState.NoTracking ? Table.AsNoTracking().FirstOrDefault(filter) : Table.FirstOrDefault(filter);
 
-        public Task<T?> GetByFilterAsync(Expression<Func<T, bool>> filter, TrackingState trackingState) => trackingState == TrackingState.NoTracking ? Table.AsNoTracking().FirstOrDefaultAsync(filter) : Table.FirstOrDefaultAsync(filter);
+        public Task<T?> GetByFilterAsync(Expression<Func<T, bool>> filter, TrackingState trackingState = TrackingState.WithTracking) => trackingState == TrackingState.NoTracking ? Table.AsNoTracking().FirstOrDefaultAsync(filter) : Table.FirstOrDefaultAsync(filter);
 
-        public T? GetById(Guid id, TrackingState trackingState) => trackingState == TrackingState.NoTracking ? Table.AsNoTracking().FirstOrDefault(entity => entity.Id == id) : Table.FirstOrDefault(entity => entity.Id == id);
+        public T? GetById(Guid id, TrackingState trackingState = TrackingState.WithTracking) => trackingState == TrackingState.NoTracking ? Table.AsNoTracking().FirstOrDefault(entity => entity.Id == id) : Table.FirstOrDefault(entity => entity.Id == id);
 
-        public Task<T?> GetByIdAsync(Guid id, TrackingState trackingState) => trackingState == TrackingState.NoTracking ? Table.AsNoTracking().FirstOrDefaultAsync(entity => entity.Id == id) : Table.FirstOrDefaultAsync(entity => entity.Id == id);
+        public Task<T?> GetByIdAsync(Guid id, TrackingState trackingState = TrackingState.WithTracking) => trackingState == TrackingState.NoTracking ? Table.AsNoTracking().FirstOrDefaultAsync(entity => entity.Id == id) : Table.FirstOrDefaultAsync(entity => entity.Id == id);
     }
 }
