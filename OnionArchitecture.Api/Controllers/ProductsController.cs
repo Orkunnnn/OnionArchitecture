@@ -1,8 +1,8 @@
-﻿using MediatR;
+﻿using System.Net;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using OnionArchitecture.Application.CQRS.Commands.CreateProduct;
 using OnionArchitecture.Application.CQRS.Queries.GetAllProducts;
-using System.Net;
 
 namespace OnionArchitecture.Api.Controllers
 {
