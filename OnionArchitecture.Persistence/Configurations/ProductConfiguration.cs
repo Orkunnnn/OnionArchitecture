@@ -13,6 +13,7 @@ namespace OnionArchitecture.Persistence.Configurations
             builder.Property(p => p.Price).IsRequired().HasPrecision(2, 1);
             builder.Property(p => p.CreatedDate).IsRequired();
             builder.Property(p => p.UpdatedDate).IsRequired(false);
+            builder.Property(p => p.CategoryId).IsRequired();
             builder.HasOne(p => p.Category).WithMany(c => c.Products);
         }
     }
