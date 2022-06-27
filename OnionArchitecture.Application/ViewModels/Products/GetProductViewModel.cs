@@ -1,10 +1,10 @@
 ﻿namespace OnionArchitecture.Application.ViewModels.Products
 {
-    public class AddProductViewModel
+    public class GetProductViewModel
     {
-        public Guid CategoryId { get; set; }
         public string Name { get; set; } = default!;
         public int Stock { get; set; }
         public decimal Price { get; set; }
+        public string CategoryName { get; set; } = default!;
     }
 }
