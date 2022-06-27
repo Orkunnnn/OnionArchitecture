@@ -12,6 +12,7 @@ namespace OnionArchitecture.Test
         private DbContextOptions<OnionArchitectureDbContext> _dbContextOptions;
         private ProductReadRepository _productReadRepository;
         private Guid _productId;
+
         [SetUp]
         public void Setup()
         {
