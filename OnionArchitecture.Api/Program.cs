@@ -1,4 +1,3 @@
-using FluentValidation.AspNetCore;
 using OnionArchitecture.Application;
 using OnionArchitecture.Persistence;
 
@@ -6,7 +5,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers().AddFluentValidation();
+builder.Services.AddControllers();
 builder.Services.AddPersistenceServices();
 builder.Services.AddApplicationServices();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
