@@ -9,6 +9,7 @@ namespace OnionArchitecture.Application.Mappings.AutoMapper
         public ProductProfile()
         {
             CreateMap<Product, GetProductViewModel>().ForMember(p => p.CategoryName, opt => opt.MapFrom(src => src.Category.Name));
+            CreateMap<Product, UpdateProductViewModel>().ReverseMap();
         }
     }
 }
