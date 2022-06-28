@@ -11,14 +11,24 @@ namespace OnionArchitecture.Persistence.Repositories.Common
 
         public WriteRepository(OnionArchitectureDbContext context)
         {
-            this._context = context;
+            _context = context;
         }
 
         public DbSet<T> Table => _context.Set<T>();
 
         public T Add(T entity) => Table.Add(entity).Entity;
 
-        public bool Remove(T entity) => Table.Remove(entity).State == EntityState.Deleted;
+        public bool Remove(Guid id)
+        {
+            var entity = Table.Find(id);
+            if (entity is null)
+            {
+                return false;
+            }
+
+            Table.Remove(entity);
+            return true;
+        }
 
         public int Save() => _context.SaveChanges();
 
