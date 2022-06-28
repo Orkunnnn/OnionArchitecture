@@ -1,8 +1,10 @@
 ﻿using System.Net;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using OnionArchitecture.Application.CQRS.Commands.CreateProduct;
+using OnionArchitecture.Application.CQRS.Commands.DeleteProduct;
+using OnionArchitecture.Application.CQRS.Commands.UpdateProduct;
 using OnionArchitecture.Application.CQRS.Queries.GetAllProducts;
+using OnionArchitecture.Application.ViewModels.Products;
 
 namespace OnionArchitecture.Api.Controllers
 {
@@ -25,10 +27,27 @@ namespace OnionArchitecture.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post(CreateProductCommandRequest createProductCommandRequest)
+        public async Task<IActionResult> Post(AddProductViewModel createProductCommandRequest)
         {
             await _mediator.Send(createProductCommandRequest);
             return StatusCode((int)HttpStatusCode.Created);
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> Put(UpdateProductCommandRequest updateProductCommandRequest)
+        {
+            await _mediator.Send(updateProductCommandRequest);
+            return Ok();
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> Delete(DeleteProductCommandRequest deleteProductCommandRequest)
+        {
+            var response = await _mediator.Send(deleteProductCommandRequest);
+            if (!response.Result)
+                return BadRequest();
+
+            return Ok();
         }
     }
 }
