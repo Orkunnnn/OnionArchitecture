@@ -6,7 +6,7 @@ namespace OnionArchitecture.Application.Repositories.Common
     {
         T Add(T entity);
         T Update(T entity);
-        bool Remove(T entity);
+        bool Remove(Guid id);
         int Save();
         Task<int> SaveAsync();
     }
