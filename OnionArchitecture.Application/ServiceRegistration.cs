@@ -1,4 +1,6 @@
-﻿using MediatR;
+﻿using System.Reflection;
+using FluentValidation.AspNetCore;
+using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace OnionArchitecture.Application
@@ -10,6 +12,7 @@ namespace OnionArchitecture.Application
             var serviceRegistrationType = typeof(ServiceRegistration);
             services.AddMediatR(serviceRegistrationType);
             services.AddAutoMapper(serviceRegistrationType);
+            services.AddFluentValidation(configuration => configuration.RegisterValidatorsFromAssembly(Assembly.GetExecutingAssembly()));
         }
     }
 }
