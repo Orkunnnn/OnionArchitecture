@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using OnionArchitecture.Application.Repositories.Categories;
 using OnionArchitecture.Application.Repositories.Products;
 using OnionArchitecture.Persistence.Contexts;
@@ -12,7 +11,7 @@ namespace OnionArchitecture.Persistence
     {
         public static void AddPersistenceServices(this IServiceCollection services)
         {
-            services.AddDbContext<OnionArchitectureDbContext>(options => options.UseSqlServer(Configuration.ConnectionString));
+            services.AddDbContext<OnionArchitectureDbContext>();
             services.AddScoped<IProductReadRepository, ProductReadRepository>();
             services.AddScoped<IProductWriteRepository, ProductWriteRepository>();
             services.AddScoped<ICategoryReadRepository, CategoryReadRepository>();
