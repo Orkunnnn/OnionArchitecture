@@ -1,5 +1,6 @@
 ﻿using System.Reflection;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using OnionArchitecture.Domain.Entities;
 using OnionArchitecture.Domain.Entities.Common;
 
@@ -7,8 +8,17 @@ namespace OnionArchitecture.Persistence.Contexts
 {
     public class OnionArchitectureDbContext : DbContext
     {
-        public OnionArchitectureDbContext(DbContextOptions options) : base(options)
+        private IConfiguration _configuration;
+
+        public OnionArchitectureDbContext(DbContextOptions options, IConfiguration configuration) : base(options)
         {
+            _configuration = configuration;
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlServer(_configuration.GetConnectionString("SqlServer"));
+            base.OnConfiguring(optionsBuilder);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
