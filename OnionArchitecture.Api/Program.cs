@@ -1,3 +1,4 @@
+using Azure.Identity;
 using OnionArchitecture.Application;
 using OnionArchitecture.Persistence;
 
@@ -6,6 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers();
+builder.Configuration.AddAzureKeyVault(new(builder.Configuration["KeyVault:VaultUri"]), new DefaultAzureCredential());
 builder.Services.AddPersistenceServices();
 builder.Services.AddApplicationServices();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
