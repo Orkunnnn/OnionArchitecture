@@ -1,4 +1,5 @@
 using Azure.Identity;
+using OnionArchitecture.Api.Middlewares;
 using OnionArchitecture.Application;
 using OnionArchitecture.Persistence;
 
@@ -25,7 +26,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
+app.UseMiddleware<ApiKeyMiddleware>();
 app.UseAuthorization();
 
 app.MapControllers();
