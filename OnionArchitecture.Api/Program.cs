@@ -1,7 +1,9 @@
+using System.Text.Json;
 using Azure.Identity;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using OnionArchitecture.Api.HealthCheck;
 using OnionArchitecture.Api.Middlewares;
-using OnionArchitecture.Application;
-using OnionArchitecture.Persistence;
+using OnionArchitecture.Api.Registrations;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,8 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Configuration.AddAzureKeyVault(new(builder.Configuration["KeyVault:VaultUri"]), new DefaultAzureCredential());
-builder.Services.AddPersistenceServices();
-builder.Services.AddApplicationServices();
+builder.Services.AddApiRegistrations(builder.Configuration);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -24,7 +25,25 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+app.UseHealthChecks("/health", new HealthCheckOptions
+{
+    ResponseWriter = async (context, report) =>
+    {
+        context.Response.ContentType = "application/json";
+        var response = new HealthCheckResponse
+        {
+            Status = report.Status.ToString(),
+            Checks = report.Entries.Select(x => new HealthCheck
+            {
+                Component = x.Key,
+                Status = x.Value.Status.ToString(),
+                Description = x.Value.Description
+            }),
+            Duration = report.TotalDuration
+        };
+        await context.Response.WriteAsync(JsonSerializer.Serialize(response));
+    }
+});
 app.UseHttpsRedirection();
 app.UseMiddleware<ApiKeyMiddleware>();
 app.UseAuthorization();
